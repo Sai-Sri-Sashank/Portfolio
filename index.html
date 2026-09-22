@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tadivalasa Sai Sri Sashank — Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts: Playfair Display for editorial headings & Inter for crisp UI text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              editorial: {
+                bg: "#141210",
+                card: "#1D1A17",
+                cardHover: "#26221E",
+                border: "#332D28",
+                accent: "#D4AF37" /* Subtle bronze/gold */,
+                accentLight: "#F3E5AB",
+                textMain: "#F5F2EB",
+                textMuted: "#A39B90",
+              },
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #141210;
+        color: #f5f2eb;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .font-editorial {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Smooth reveal animation classes */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #141210;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #332d28;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #d4af37;
+      }
+
+      /* Subtle glowing radial gradient background */
+      .bg-glow {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(212, 175, 55, 0.08) 0%,
+          rgba(20, 18, 16, 0) 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-editorial-bg text-editorial-textMain selection:bg-editorial-accent selection:text-editorial-bg relative"
+  >
+    <!-- Sticky Navigation Header -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-editorial-bg/85 backdrop-blur-md border-b border-editorial-border transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between"
+      >
+        <a
+          href="#"
+          class="font-editorial text-2xl font-bold tracking-tight hover:text-editorial-accent transition-colors"
+        >
+          T. Sai Sri Sashank
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav
+          class="hidden md:flex items-center space-x-8 text-sm font-medium text-editorial-textMuted"
+        >
+          <a
+            href="#about"
+            class="hover:text-editorial-textMain transition-colors"
+            >About</a
+          >
+          <a
+            href="#education"
+            class="hover:text-editorial-textMain transition-colors"
+            >Education</a
+          >
+          <a
+            href="#skills"
+            class="hover:text-editorial-textMain transition-colors"
+            >Tech Stack</a
+          >
+          <a
+            href="#projects"
+            class="hover:text-editorial-textMain transition-colors"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="hover:text-editorial-textMain transition-colors"
+            >Contact</a
+          >
+        </nav>
+
+        <!-- CTA button -->
+        <div class="hidden md:block">
+          <a
+            href="#contact"
+            class="px-5 py-2.5 rounded-full border border-editorial-accent text-editorial-accent text-sm font-medium hover:bg-editorial-accent hover:text-editorial-bg transition-all duration-300"
+          >
+            Let's Connect
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          id="menu-btn"
+          class="md:hidden text-editorial-textMain focus:outline-none p-2"
+          aria-label="Toggle Menu"
+        >
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Menu Dropdown -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-editorial-card border-b border-editorial-border px-6 py-4 space-y-3"
+      >
+        <a
+          href="#about"
+          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
+          >About</a
+        >
+        <a
+          href="#education"
+          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
+          >Education</a
+        >
+        <a
+          href="#skills"
+          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
+          >Tech Stack</a
+        >
+        <a
+          href="#projects"
+          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
+          >Projects</a
+        >
+        <a
+          href="#contact"
+          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
+          >Contact</a
+        >
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="relative pt-36 pb-20 md:pt-48 md:pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-screen text-center"
+    >
+      <div
+        class="bg-glow top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      ></div>
+
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-editorial-card border border-editorial-border mb-6 reveal"
+      >
+        <span
+          class="w-2 h-2 rounded-full bg-editorial-accent animate-pulse"
+        ></span>
+        <span
+          class="text-xs uppercase tracking-widest text-editorial-textMuted font-medium"
+          >B.Tech CSE • VIT-AP University</span
+        >
+      </div>
+
+      <h1
+        class="font-editorial text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight max-w-5xl leading-[1.1] mb-6 reveal"
+      >
+        Tadivalasa <br /><span class="italic font-normal text-editorial-accent"
+          >Sai Sri Sashank</span
+        >
+      </h1>
+
+      <p
+        class="text-lg sm:text-xl text-editorial-textMuted max-w-2xl font-light mb-10 leading-relaxed reveal"
+      >
+        Engineering robust web applications and scalable software solutions with
+        precision, clean design, and high performance.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 reveal">
+        <a
+          href="#projects"
+          class="px-8 py-3.5 rounded-full bg-editorial-accent text-editorial-bg font-semibold hover:bg-editorial-accentLight transition-all shadow-lg shadow-editorial-accent/10"
+        >
+          Explore Work <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
+        </a>
+        <a
+          href="#contact"
+          class="px-8 py-3.5 rounded-full border border-editorial-border bg-editorial-card text-editorial-textMain font-medium hover:border-editorial-accent transition-all"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </section>
+
+    <!-- Editorial Bento Grid / About Section -->
+    <section id="about" class="py-20 px-6 max-w-7xl mx-auto">
+      <div class="mb-12 reveal">
+        <h2
+          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
+        >
+          Get to Know Me
+        </h2>
+        <h3 class="font-editorial text-3xl md:text-4xl font-bold">
+          The Profile & Academic Excellence
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Who Am I -->
+        <div
+          class="md:col-span-2 bg-editorial-card border border-editorial-border rounded-3xl p-8 md:p-10 flex flex-col justify-between hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-2xl bg-editorial-bg flex items-center justify-center text-editorial-accent mb-6 border border-editorial-border"
+            >
+              <i class="fa-solid fa-user-graduate text-xl"></i>
+            </div>
+            <h4 class="font-editorial text-2xl font-bold mb-4">Who I Am</h4>
+            <p class="text-editorial-textMuted leading-relaxed mb-6">
+              I am an enthusiastic Computer Science and Engineering
+              undergraduate at VIT-AP University (Batch of 2024–2028).
+              Passionate about turning complex problem statements into elegant,
+              high-performing web applications. Driven by curiosity, clean code
+              standards, and constant learning.
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-3 gap-4 pt-6 border-t border-editorial-border text-center"
+          >
+            <div>
+              <div
+                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
+              >
+                9.39
+              </div>
+              <div
+                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
+              >
+                Current CGPA
+              </div>
+            </div>
+            <div>
+              <div
+                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
+              >
+                98.2%
+              </div>
+              <div
+                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
+              >
+                Class XII
+              </div>
+            </div>
+            <div>
+              <div
+                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
+              >
+                2028
+              </div>
+              <div
+                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
+              >
+                Graduation
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Academic Anchor / VIT-AP -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 md:p-10 flex flex-col justify-between hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div>
+            <div
+              class="w-12 h-12 rounded-2xl bg-editorial-bg flex items-center justify-center text-editorial-accent mb-6 border border-editorial-border"
+            >
+              <i class="fa-solid fa-university text-xl"></i>
+            </div>
+            <h4 class="font-editorial text-2xl font-bold mb-3" id="education">
+              Education
+            </h4>
+            <p class="text-sm font-medium text-editorial-textMain mb-1">
+              VIT-AP University, Amaravati
+            </p>
+            <p class="text-xs text-editorial-textMuted mb-4">
+              B.Tech in Computer Science & Engineering<br />2024 – 2028
+              (Expected)
+            </p>
+            <div
+              class="p-3.5 rounded-2xl bg-editorial-bg border border-editorial-border text-xs text-editorial-textMuted"
+            >
+              <strong class="text-editorial-textMain font-semibold"
+                >Intermediate (Class XII):</strong
+              >
+              98.2% aggregate score with rigorous foundation in STEM.
+            </div>
+          </div>
+          <div
+            class="mt-6 pt-4 text-xs tracking-widest uppercase text-editorial-accent font-medium flex items-center gap-2"
+          >
+            <span>Verified Milestone</span>
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack & Skills Section -->
+    <section id="skills" class="py-20 px-6 max-w-7xl mx-auto">
+      <div class="mb-12 reveal text-center md:text-left">
+        <h2
+          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
+        >
+          Capabilities
+        </h2>
+        <h3 class="font-editorial text-3xl md:text-4xl font-bold">
+          Technical Arsenal
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Programming Languages -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
+            >
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h4 class="font-editorial text-lg font-bold">Languages</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >Java</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >Python</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >C</span
+            >
+          </div>
+        </div>
+
+        <!-- Web Development -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
+            >
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h4 class="font-editorial text-lg font-bold">Web Development</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >HTML5</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >CSS3</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >JavaScript</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >React</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >Node.js</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >Express.js</span
+            >
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
+            >
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h4 class="font-editorial text-lg font-bold">Databases</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >MySQL</span
+            >
+          </div>
+        </div>
+
+        <!-- Other & Tools -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
+            >
+              <i class="fa-solid fa-toolbox"></i>
+            </div>
+            <h4 class="font-editorial text-lg font-bold">Tools & Core</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >Git & GitHub</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >DSA</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >DBMS</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >OOPS</span
+            >
+            <span
+              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
+              >App Deployment</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section id="projects" class="py-20 px-6 max-w-7xl mx-auto">
+      <div
+        class="mb-12 flex flex-col md:flex-row md:items-end justify-between reveal"
+      >
+        <div>
+          <h2
+            class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
+          >
+            The Receipts
+          </h2>
+          <h3 class="font-editorial text-3xl md:text-4xl font-bold">
+            Featured Projects
+          </h3>
+        </div>
+        <p class="text-editorial-textMuted text-sm max-w-md mt-4 md:mt-0">
+          Production-deployed web solutions showcasing robust frontend
+          engineering, intuitive user workflows, and performance optimization.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Project 1: React Task Manager -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 flex flex-col justify-between hover:border-editorial-accent/50 transition-all duration-300 group reveal"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-editorial-bg border border-editorial-border text-editorial-accent font-medium"
+                >Frontend Application</span
+              >
+              <span class="text-xs text-editorial-textMuted font-mono"
+                >React / LocalStorage</span
+              >
+            </div>
+            <h4
+              class="font-editorial text-2xl md:text-3xl font-bold mb-4 group-hover:text-editorial-accent transition-colors"
+            >
+              React Task Manager
+            </h4>
+            <p class="text-editorial-textMuted leading-relaxed mb-6">
+              Frontend-only task management application built with React,
+              utilizing browser local storage for persistent data management
+              without a backend dependency. Clean modular architecture and
+              responsive interface.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >React</span
+              >
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >Local Storage</span
+              >
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >CSS Modules</span
+              >
+            </div>
+          </div>
+          <div
+            class="pt-6 border-t border-editorial-border flex flex-wrap items-center justify-between gap-4"
+          >
+            <div class="flex items-center gap-3">
+              <a
+                href="https://github.com/Sai-Sri-Sashank/React-Task-Manager"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs text-editorial-textMuted hover:text-editorial-accent transition-colors"
+              >
+                <i class="fa-brands fa-github text-sm"></i>
+                <span>Source Code</span>
+              </a>
+            </div>
+            <a
+              href="https://react-task-manager-dxu2-1o04tr2j6-sai-sri-sashanks-projects.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-editorial-accent text-editorial-bg text-xs font-semibold hover:bg-editorial-accentLight transition-all"
+            >
+              <span>Live Preview</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: E-Commerce Website -->
+        <div
+          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 flex flex-col justify-between hover:border-editorial-accent/50 transition-all duration-300 group reveal"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span
+                class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-editorial-bg border border-editorial-border text-editorial-accent font-medium"
+                >Full-Featured Web App</span
+              >
+              <span class="text-xs text-editorial-textMuted font-mono"
+                >E-Commerce / Deployed</span
+              >
+            </div>
+            <h4
+              class="font-editorial text-2xl md:text-3xl font-bold mb-4 group-hover:text-editorial-accent transition-colors"
+            >
+              E-Commerce Website
+            </h4>
+            <p class="text-editorial-textMuted leading-relaxed mb-6">
+              Full-featured e-commerce web application featuring product
+              browsing, interactive cart management, and streamlined checkout
+              flow, built and deployed independently.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >JavaScript</span
+              >
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >Node.js</span
+              >
+              <span
+                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
+                >Vercel</span
+              >
+            </div>
+          </div>
+          <div
+            class="pt-6 border-t border-editorial-border flex flex-wrap items-center justify-between gap-4"
+          >
+            <div class="flex items-center gap-3">
+              <a
+                href="https://github.com/Sai-Sri-Sashank/ECOMMERCE"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs text-editorial-textMuted hover:text-editorial-accent transition-colors"
+              >
+                <i class="fa-brands fa-github text-sm"></i>
+                <span>Source Code</span>
+              </a>
+            </div>
+            <a
+              href="https://ecommerce-theta-two-82.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-editorial-accent text-editorial-bg text-xs font-semibold hover:bg-editorial-accentLight transition-all"
+            >
+              <span>Live Preview</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <section id="contact" class="py-24 px-6 max-w-5xl mx-auto text-center">
+      <div
+        class="bg-editorial-card border border-editorial-border rounded-3xl p-10 md:p-16 relative overflow-hidden reveal"
+      >
+        <div class="bg-glow top-0 right-0"></div>
+
+        <h2
+          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
+        >
+          Let's Build Together
+        </h2>
+        <h3 class="font-editorial text-3xl md:text-5xl font-bold mb-6">
+          Start a Conversation
+        </h3>
+        <p
+          class="text-editorial-textMuted max-w-xl mx-auto mb-10 text-sm md:text-base leading-relaxed"
+        >
+          Whether you have an opportunity, a project collaboration in mind, or
+          just want to connect, feel free to reach out through any of the
+          channels below.
+        </p>
+
+        <!-- Social Links Grid -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+          <!-- GitHub -->
+          <a
+            href="https://github.com/Sai-Sri-Sashank"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
+          >
+            <i class="fa-brands fa-github text-lg"></i>
+            <span>GitHub</span>
+          </a>
+          <!-- LinkedIn -->
+          <a
+            href="https://www.linkedin.com/in/sai-sri-sashank-tadivalasa-524bb933a"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
+          >
+            <i class="fa-brands fa-linkedin text-lg text-[#0A66C2]"></i>
+            <span>LinkedIn</span>
+          </a>
+          <!-- LeetCode -->
+          <a
+            href="https://leetcode.com/u/Sashank-2007/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
+          >
+            <i class="fa-solid fa-code text-lg text-[#FFA116]"></i>
+            <span>LeetCode</span>
+          </a>
+        </div>
+
+        <div class="pt-8 border-t border-editorial-border inline-block w-full">
+          <a
+            href="mailto:saisrishanktadivalasa@gmail.com"
+            class="text-editorial-accent hover:underline text-sm md:text-base font-medium tracking-wide"
+          >
+            <i class="fa-regular fa-envelope mr-2"></i>
+            saisrishanktadivalasa@gmail.com
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="py-8 px-6 border-t border-editorial-border text-center text-xs text-editorial-textMuted max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
+      <p>© 2026 Tadivalasa Sai Sri Sashank. All rights reserved.</p>
+      <p>Built with Editorial Elegance & Tailwind CSS.</p>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu & Scroll Reveals -->
+    <script>
+      // Mobile menu toggle
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Intersection Observer for smooth reveal animations
+      const revealElements = document.querySelectorAll(".reveal");
+
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        },
+      );
+
+      revealElements.forEach((el) => {
+        revealObserver.observe(el);
+      });
+    </script>
+  </body>
+</html>
