@@ -1,780 +1,649 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tadivalasa Sai Sri Sashank — Portfolio</title>
-    <!-- Tailwind CSS CDN -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadivalasa Sai Sri Sashank | Editorial Tech Portfolio</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for editorial headings & Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Google Fonts: Playfair Display for editorial headings & Inter for crisp UI text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind Configuration for Magazine Palette -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              editorial: {
-                bg: "#141210",
-                card: "#1D1A17",
-                cardHover: "#26221E",
-                border: "#332D28",
-                accent: "#D4AF37" /* Subtle bronze/gold */,
-                accentLight: "#F3E5AB",
-                textMain: "#F5F2EB",
-                textMuted: "#A39B90",
-              },
-            },
-            fontFamily: {
-              serif: ['"Playfair Display"', "serif"],
-              sans: ['"Inter"', "sans-serif"],
-            },
-          },
-        },
-      };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        editorialCream: '#F4ECD8',
+                        editorialSand: '#E6DCBF',
+                        editorialSlate: '#2E3856',
+                        editorialBlue: '#3B456B',
+                        editorialAccent: '#D97706',
+                        editorialRose: '#E0A96D',
+                        editorialDark: '#1A2138'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
     </script>
     <style>
-      body {
-        background-color: #141210;
-        color: #f5f2eb;
-        font-family: "Inter", sans-serif;
-        overflow-x: hidden;
-      }
+        body {
+            background-color: #F4ECD8;
+            color: #2E3856;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
 
-      .font-editorial {
-        font-family: "Playfair Display", serif;
-      }
+        .editorial-title {
+            font-family: 'Playfair Display', serif;
+        }
 
-      /* Smooth reveal animation classes */
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-      }
+        .code-font {
+            font-family: 'Space Mono', monospace;
+        }
 
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #141210;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #332d28;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #d4af37;
-      }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4ECD8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2E3856;
+            border-radius: 4px;
+        }
 
-      /* Subtle glowing radial gradient background */
-      .bg-glow {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(
-          circle,
-          rgba(212, 175, 55, 0.08) 0%,
-          rgba(20, 18, 16, 0) 70%
-        );
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-      }
+        /* Float animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Marquee ticker animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Grain overlay for magazine texture */
+        .magazine-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* Glassmorphism card utility */
+        .editorial-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid #2E3856;
+            box-shadow: 6px 6px 0px #2E3856;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .editorial-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #2E3856;
+        }
+
+        .editorial-btn {
+            background-color: #2E3856;
+            color: #F4ECD8;
+            border: 2px solid #2E3856;
+            box-shadow: 4px 4px 0px #D97706;
+            transition: all 0.15s ease;
+        }
+        .editorial-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #D97706;
+            background-color: #3B456B;
+        }
+        .editorial-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px #D97706;
+        }
+
+        /* Fade in on scroll utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
-  </head>
-  <body
-    class="bg-editorial-bg text-editorial-textMain selection:bg-editorial-accent selection:text-editorial-bg relative"
-  >
-    <!-- Sticky Navigation Header -->
-    <header
-      class="fixed top-0 left-0 right-0 z-50 bg-editorial-bg/85 backdrop-blur-md border-b border-editorial-border transition-all duration-300"
-    >
-      <div
-        class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between"
-      >
-        <a
-          href="#"
-          class="font-editorial text-2xl font-bold tracking-tight hover:text-editorial-accent transition-colors"
-        >
-          T. Sai Sri Sashank
-        </a>
+</head>
+<body class="magazine-grain relative selection:bg-editorialSlate selection:text-editorialCream">
 
-        <!-- Desktop Nav Links -->
-        <nav
-          class="hidden md:flex items-center space-x-8 text-sm font-medium text-editorial-textMuted"
-        >
-          <a
-            href="#about"
-            class="hover:text-editorial-textMain transition-colors"
-            >About</a
-          >
-          <a
-            href="#education"
-            class="hover:text-editorial-textMain transition-colors"
-            >Education</a
-          >
-          <a
-            href="#skills"
-            class="hover:text-editorial-textMain transition-colors"
-            >Tech Stack</a
-          >
-          <a
-            href="#projects"
-            class="hover:text-editorial-textMain transition-colors"
-            >Projects</a
-          >
-          <a
-            href="#contact"
-            class="hover:text-editorial-textMain transition-colors"
-            >Contact</a
-          >
-        </nav>
+    <!-- Top Editorial Header & Nav -->
+    <header class="sticky top-0 z-50 bg-editorialCream/95 backdrop-blur-md border-b-2 border-editorialSlate px-4 lg:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-editorialSlate text-editorialCream rounded-full flex items-center justify-center font-serif font-bold text-xl group-hover:rotate-12 transition-transform">
+                    S
+                </div>
+                <div>
+                    <span class="editorial-title font-bold text-lg lg:text-xl tracking-tight block leading-none">SAI SRI SASHANK</span>
+                    
+                </div>
+            </a>
 
-        <!-- CTA button -->
-        <div class="hidden md:block">
-          <a
-            href="#contact"
-            class="px-5 py-2.5 rounded-full border border-editorial-accent text-editorial-accent text-sm font-medium hover:bg-editorial-accent hover:text-editorial-bg transition-all duration-300"
-          >
-            Let's Connect
-          </a>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
+                <a href="#about" class="hover:text-editorialAccent transition-colors">THE PROFILE</a>
+                <a href="#skills" class="hover:text-editorialAccent transition-colors">TECH STACK</a>
+                <a href="#projects" class="hover:text-editorialAccent transition-colors">FEATURED WORKS</a>
+                <a href="#contact" class="hover:text-editorialAccent transition-colors">CONNECT</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sashanktadivalasa2007@gmail.com" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider editorial-btn rounded-full">
+                    <i class="fa-regular fa-paper-plane"></i> Let's Talk
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="menu-toggle" class="md:hidden w-10 h-10 border-2 border-editorialSlate rounded-lg flex items-center justify-center bg-editorialSand text-editorialSlate focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button
-          id="menu-btn"
-          class="md:hidden text-editorial-textMain focus:outline-none p-2"
-          aria-label="Toggle Menu"
-        >
-          <i class="fa-solid fa-bars text-xl"></i>
-        </button>
-      </div>
-
-      <!-- Mobile Navigation Menu Dropdown -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-editorial-card border-b border-editorial-border px-6 py-4 space-y-3"
-      >
-        <a
-          href="#about"
-          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
-          >About</a
-        >
-        <a
-          href="#education"
-          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
-          >Education</a
-        >
-        <a
-          href="#skills"
-          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
-          >Tech Stack</a
-        >
-        <a
-          href="#projects"
-          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
-          >Projects</a
-        >
-        <a
-          href="#contact"
-          class="block text-editorial-textMuted hover:text-editorial-textMain py-1 mobile-link"
-          >Contact</a
-        >
-      </div>
+        <!-- Mobile Nav Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t-2 border-editorialSlate mt-4 flex flex-col gap-3 font-semibold text-center">
+            <a href="#about" class="py-2 hover:bg-editorialSand rounded">THE PROFILE</a>
+            <a href="#skills" class="py-2 hover:bg-editorialSand rounded">TECH STACK</a>
+            <a href="#projects" class="py-2 hover:bg-editorialSand rounded">FEATURED WORKS</a>
+            <a href="#contact" class="py-2 hover:bg-editorialSand rounded">CONNECT</a>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section
-      class="relative pt-36 pb-20 md:pt-48 md:pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-screen text-center"
-    >
-      <div
-        class="bg-glow top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2"
-      ></div>
+    <!-- Magazine Ticker Bar -->
+    <div class="bg-editorialSlate text-editorialCream py-2.5 overflow-hidden border-b-2 border-editorialSlate text-xs code-font uppercase tracking-widest">
+        <div class="animate-marquee whitespace-nowrap flex gap-12">
+            <span>⚡ CSE CORE @ VIT-AP 2024–2028</span>
+            <span>•</span>
+            <span>CGPA: 9.39 / 10</span>
+            <span>•</span>
+            <span>FULL STACK ENGINEER & SOFTWARE ARCHITECT</span>
+            <span>•</span>
+            <span>BUILDING SCALABLE DIGITAL PRODUCTS</span>
+            <span>•</span>
+            <span>⚡ CSE CORE @ VIT-AP 2024–2028</span>
+            <span>•</span>
+            <span>CGPA: 9.39 / 10</span>
+            <span>•</span>
+            <span>FULL STACK ENGINEER & SOFTWARE ARCHITECT</span>
+            <span>•</span>
+            <span>BUILDING SCALABLE DIGITAL PRODUCTS</span>
+        </div>
+    </div>
 
-      <div
-        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-editorial-card border border-editorial-border mb-6 reveal"
-      >
-        <span
-          class="w-2 h-2 rounded-full bg-editorial-accent animate-pulse"
-        ></span>
-        <span
-          class="text-xs uppercase tracking-widest text-editorial-textMuted font-medium"
-          >B.Tech CSE • VIT-AP University</span
-        >
-      </div>
+    <!-- Hero Magazine Cover Section -->
+    <section class="relative px-4 lg:px-12 py-12 lg:py-20 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Editorial Title Block -->
+            <div class="lg:col-span-7 space-y-6 reveal active">
+                <div class="inline-flex items-center gap-3 px-3 py-1.5 border-2 border-editorialSlate rounded-full bg-editorialSand text-xs font-bold code-font">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-ping"></span>
+                    OPEN FOR SOFTWARE ENGINEERING ROLES & INTERNSHIPS
+                </div>
+                
+                <h1 class="editorial-title text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-editorialSlate">
+                    TADIVALASA SAI <br>
+                    <span class="italic font-normal text-editorialBlue">SRI</span> <br>
+                    SASHANK.
+                </h1>
 
-      <h1
-        class="font-editorial text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight max-w-5xl leading-[1.1] mb-6 reveal"
-      >
-        Tadivalasa <br /><span class="italic font-normal text-editorial-accent"
-          >Sai Sri Sashank</span
-        >
-      </h1>
+                <p class="text-lg lg:text-xl text-editorialSlate/90 font-medium max-w-xl leading-relaxed">
+                    "I build practical, user-focused software that turns ideas into functional, scalable digital products."
+                </p>
 
-      <p
-        class="text-lg sm:text-xl text-editorial-textMuted max-w-2xl font-light mb-10 leading-relaxed reveal"
-      >
-        Engineering robust web applications and scalable software solutions with
-        precision, clean design, and high performance.
-      </p>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#projects" class="px-6 py-3.5 rounded-full font-bold uppercase tracking-wider text-sm editorial-btn flex items-center gap-2">
+                        <span>Explore Projects</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <a href="https://github.com/Sai-Sri-Sashank" target="_blank" class="px-6 py-3.5 rounded-full font-bold uppercase tracking-wider text-sm border-2 border-editorialSlate bg-editorialSand text-editorialSlate hover:bg-editorialSlate hover:text-editorialCream transition-all flex items-center gap-2 shadow-[4px_4px_0px_#2E3856]">
+                        <i class="fa-brands fa-github text-lg"></i> GitHub
+                    </a>
+                </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-4 reveal">
-        <a
-          href="#projects"
-          class="px-8 py-3.5 rounded-full bg-editorial-accent text-editorial-bg font-semibold hover:bg-editorial-accentLight transition-all shadow-lg shadow-editorial-accent/10"
-        >
-          Explore Work <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
-        </a>
-        <a
-          href="#contact"
-          class="px-8 py-3.5 rounded-full border border-editorial-border bg-editorial-card text-editorial-textMain font-medium hover:border-editorial-accent transition-all"
-        >
-          Get in Touch
-        </a>
-      </div>
+                <!-- Quick Stats row -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t-2 border-editorialSlate/20">
+                    <div>
+                        <span class="block editorial-title text-3xl lg:text-4xl font-bold">9.39</span>
+                        <span class="code-font text-xs uppercase tracking-wider text-editorialSlate/70">VIT-AP CGPA</span>
+                    </div>
+                    <div>
+                        <span class="block editorial-title text-3xl lg:text-4xl font-bold">2028</span>
+                        <span class="code-font text-xs uppercase tracking-wider text-editorialSlate/70">Graduation</span>
+                    </div>
+                    <div>
+                        <span class="block editorial-title text-3xl lg:text-4xl font-bold">98.2%</span>
+                        <span class="code-font text-xs uppercase tracking-wider text-editorialSlate/70">Intermediate Score</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Magazine Feature Card / Profile Card -->
+            <div class="lg:col-span-5 reveal">
+                <div class="editorial-card rounded-3xl p-6 lg:p-8 bg-editorialSlate text-editorialCream relative overflow-hidden shadow-[8px_8px_0px_#D97706]">
+                    <!-- Decorative background badge -->
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-editorialBlue/40 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="flex justify-between items-start mb-6 border-b border-editorialCream/20 pb-4">
+                        <div>
+                            <span class="code-font text-xs text-editorialRose uppercase tracking-widest block">FEATURED PROFILE</span>
+                            <h2 class="editorial-title text-2xl font-bold text-editorialCream mt-1">Tadivalasa Sai Sri Sashank</h2>
+                        </div>
+                        <div class="w-12 h-12 bg-editorialRose text-editorialDark font-black text-xl rounded-xl flex items-center justify-center border-2 border-editorialCream shadow-md animate-float">
+                            SS
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-sm text-editorialCream/90 font-light">
+                        <div class="flex items-center justify-between py-2 border-b border-editorialCream/10">
+                            <span class="code-font text-xs text-editorialRose">CURRENT ROLE</span>
+                            <span class="font-semibold text-right">B.Tech CSE (Core) Student</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-editorialCream/10">
+                            <span class="code-font text-xs text-editorialRose">INSTITUTION</span>
+                            <span class="font-semibold text-right">VIT-AP University, Amaravati</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <span class="code-font text-xs text-editorialRose">CORE EXPERTISE</span>
+                            <span class="font-semibold text-right">Full Stack & Databases</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-editorialCream/20 flex items-center justify-between">
+                        <a href="https://www.linkedin.com/in/sai-sri-sashank-tadivalasa-524bb933a" target="_blank" class="text-xs code-font underline hover:text-editorialRose flex items-center gap-1">
+                            <i class="fa-brands fa-linkedin"></i> Connect on LinkedIn
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
 
-    <!-- Editorial Bento Grid / About Section -->
-    <section id="about" class="py-20 px-6 max-w-7xl mx-auto">
-      <div class="mb-12 reveal">
-        <h2
-          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
-        >
-          Get to Know Me
-        </h2>
-        <h3 class="font-editorial text-3xl md:text-4xl font-bold">
-          The Profile & Academic Excellence
-        </h3>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Card 1: Who Am I -->
-        <div
-          class="md:col-span-2 bg-editorial-card border border-editorial-border rounded-3xl p-8 md:p-10 flex flex-col justify-between hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div>
-            <div
-              class="w-12 h-12 rounded-2xl bg-editorial-bg flex items-center justify-center text-editorial-accent mb-6 border border-editorial-border"
-            >
-              <i class="fa-solid fa-user-graduate text-xl"></i>
+    <!-- About & Education Magazine Spread -->
+    <section id="about" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto border-t-2 border-editorialSlate/20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-5 space-y-6 reveal">
+                <div class="inline-block px-3 py-1 bg-editorialSlate text-editorialCream rounded text-xs code-font uppercase">
+                    01 // THE BIOGRAPHY
+                </div>
+                <h2 class="editorial-title text-4xl lg:text-5xl font-bold tracking-tight text-editorialSlate">
+                    Engineered for <br><span class="italic text-editorialBlue">Excellence</span> & Impact.
+                </h2>
+                <p class="text-editorialSlate/80 leading-relaxed font-medium">
+                    I am a dedicated Computer Science Engineering undergraduate at VIT-AP University with a strong academic foundation (9.39 CGPA) and a passion for creating reliable, robust applications from database architecture to sleek user interfaces.
+                </p>
+                <div class="p-4 bg-editorialSand border-2 border-editorialSlate rounded-2xl shadow-[4px_4px_0px_#2E3856]">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-graduation-cap text-xl text-editorialBlue"></i>
+                        <h4 class="font-bold text-editorialSlate">Academic Milestones</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-editorialSlate/90 font-medium">
+                        <li class="flex justify-between items-center">
+                            <span>B.Tech CSE - VIT-AP</span>
+                            <span class="code-font font-bold text-editorialAccent">9.39 CGPA</span>
+                        </li>
+                        <li class="flex justify-between items-center border-t border-editorialSlate/10 pt-2">
+                            <span>Intermediate Education</span>
+                            <span class="code-font font-bold">98.2%</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <h4 class="font-editorial text-2xl font-bold mb-4">Who I Am</h4>
-            <p class="text-editorial-textMuted leading-relaxed mb-6">
-              I am an enthusiastic Computer Science and Engineering
-              undergraduate at VIT-AP University (Batch of 2024–2028).
-              Passionate about turning complex problem statements into elegant,
-              high-performing web applications. Driven by curiosity, clean code
-              standards, and constant learning.
+
+            <div class="lg:col-span-7 reveal">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Stat Card 1 -->
+                    <div class="editorial-card rounded-2xl p-6 bg-white">
+                        <div class="w-12 h-12 bg-editorialSlate text-editorialCream rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="editorial-title text-xl font-bold mb-2">Full-Stack Development</h3>
+                        <p class="text-sm text-editorialSlate/70">
+                            Designing responsive React frontends coupled with Node.js & Express.js backends.
+                        </p>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="editorial-card rounded-2xl p-6 bg-white">
+                        <div class="w-12 h-12 bg-editorialSlate text-editorialCream rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="editorial-title text-xl font-bold mb-2">Database Fundamentals</h3>
+                        <p class="text-sm text-editorialSlate/70">
+                            Strong proficiency in MySQL schemas, normalization, and efficient querying.
+                        </p>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="editorial-card rounded-2xl p-6 bg-white">
+                        <div class="w-12 h-12 bg-editorialSlate text-editorialCream rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="editorial-title text-xl font-bold mb-2">Algorithms & Logic</h3>
+                        <p class="text-sm text-editorialSlate/70">
+                            Active problem solver on LeetCode with rigorous practice in Data Structures.
+                        </p>
+                    </div>
+                    <!-- Stat Card 4 -->
+                    <div class="editorial-card rounded-2xl p-6 bg-white">
+                        <div class="w-12 h-12 bg-editorialSlate text-editorialCream rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="editorial-title text-xl font-bold mb-2">Deployment & Git</h3>
+                        <p class="text-sm text-editorialSlate/70">
+                            Experienced with version control, collaborative workflows, and hosting full-stack apps on modern cloud platforms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Tech Stack & Skills Showcase -->
+    <section id="skills" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto border-t-2 border-editorialSlate/20">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+            <span class="code-font text-xs uppercase tracking-widest text-editorialBlue px-3 py-1 bg-editorialSand rounded-full border border-editorialSlate">
+                02 // TECHNICAL ARSENAL
+            </span>
+            <h2 class="editorial-title text-4xl lg:text-5xl font-bold mt-3 text-editorialSlate">
+                Tools & Technologies
+            </h2>
+            <p class="text-editorialSlate/70 text-sm mt-2">
+                A curated breakdown of the languages, frameworks, and tools I use to bring ideas to life.
             </p>
-          </div>
-          <div
-            class="grid grid-cols-3 gap-4 pt-6 border-t border-editorial-border text-center"
-          >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+            
+            <!-- Category 1: Languages -->
+            <div class="editorial-card p-6 rounded-2xl bg-white">
+                <div class="flex items-center gap-3 mb-4 border-b-2 border-editorialSlate pb-3">
+                    <i class="fa-solid fa-terminal text-2xl text-editorialAccent"></i>
+                    <h3 class="editorial-title font-bold text-xl">Languages</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Java</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Python</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">C</span>
+                </div>
+            </div>
+
+            <!-- Category 2: Frontend & UI -->
+            <div class="editorial-card p-6 rounded-2xl bg-white">
+                <div class="flex items-center gap-3 mb-4 border-b-2 border-editorialSlate pb-3">
+                    <i class="fa-solid fa-paint-brush text-2xl text-editorialBlue"></i>
+                    <h3 class="editorial-title font-bold text-xl">Frontend & Web</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">HTML</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">CSS</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">JavaScript</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">React JS</span>
+                </div>
+            </div>
+
+            <!-- Category 3: Backend & APIs -->
+            <div class="editorial-card p-6 rounded-2xl bg-white">
+                <div class="flex items-center gap-3 mb-4 border-b-2 border-editorialSlate pb-3">
+                    <i class="fa-solid fa-server text-2xl text-emerald-600"></i>
+                    <h3 class="editorial-title font-bold text-xl">Backend & REST</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Node.js</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Express.js</span>
+                </div>
+            </div>
+
+            <!-- Category 4: Databases & Tools -->
+            <div class="editorial-card p-6 rounded-2xl bg-white">
+                <div class="flex items-center gap-3 mb-4 border-b-2 border-editorialSlate pb-3">
+                    <i class="fa-solid fa-database text-2xl text-purple-600"></i>
+                    <h3 class="editorial-title font-bold text-xl">DB, Tools & DSA</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">MySQL</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Git</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Deployment</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Arrays</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Linked Lists</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Recursion</span>
+                    <span class="px-3 py-1.5 bg-editorialSand border border-editorialSlate rounded-lg text-xs font-bold code-font">Sorting</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-16 px-4 lg:px-12 max-w-7xl mx-auto border-t-2 border-editorialSlate/20">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
             <div>
-              <div
-                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
-              >
-                9.39
-              </div>
-              <div
-                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
-              >
-                Current CGPA
-              </div>
+                <span class="code-font text-xs uppercase tracking-widest text-editorialBlue px-3 py-1 bg-editorialSand rounded-full border border-editorialSlate">
+                    03 // FEATURED WORKS
+                </span>
+                <h2 class="editorial-title text-4xl lg:text-5xl font-bold mt-3 text-editorialSlate">
+                    Projects & Creations
+                </h2>
             </div>
-            <div>
-              <div
-                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
-              >
-                98.2%
-              </div>
-              <div
-                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
-              >
-                Class XII
-              </div>
-            </div>
-            <div>
-              <div
-                class="font-editorial text-2xl md:text-3xl font-bold text-editorial-accent"
-              >
-                2028
-              </div>
-              <div
-                class="text-xs text-editorial-textMuted uppercase tracking-wider mt-1"
-              >
-                Graduation
-              </div>
-            </div>
-          </div>
+            <p class="text-editorialSlate/70 text-sm max-w-md mt-4 md:mt-0">
+                Explore full-stack applications and responsive interfaces built with clean architecture.
+            </p>
         </div>
 
-        <!-- Card 2: Academic Anchor / VIT-AP -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 md:p-10 flex flex-col justify-between hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div>
-            <div
-              class="w-12 h-12 rounded-2xl bg-editorial-bg flex items-center justify-center text-editorial-accent mb-6 border border-editorial-border"
-            >
-              <i class="fa-solid fa-university text-xl"></i>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Project 1: React Task Manager -->
+            <div class="editorial-card rounded-3xl p-8 bg-white flex flex-col justify-between reveal">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-editorialSlate text-editorialCream rounded-full text-xs code-font uppercase">
+                            FRONTEND APP
+                        </span>
+                        <span class="code-font text-xs text-editorialSlate/60">01 / FEATURED</span>
+                    </div>
+
+                    <h3 class="editorial-title text-3xl font-bold text-editorialSlate mb-3">
+                        React Task Manager
+                    </h3>
+
+                    <p class="text-editorialSlate/80 text-sm leading-relaxed mb-6 font-medium">
+                        A frontend-only task management application built with React, using browser local storage for data persistence — no backend required.
+                    </p>
+
+                    <div class="space-y-2 mb-6 text-xs text-editorialSlate/90 font-medium bg-editorialSand/50 p-4 rounded-xl border border-editorialSlate/20">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-editorialAccent mt-0.5"></i>
+                            <span>Built a clean, component-driven React interface for creating, updating, and tracking tasks.</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-editorialAccent mt-0.5"></i>
+                            <span>Implemented persistent state via browser local storage, keeping the app fully client-side.</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">React JS</span>
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">JavaScript</span>
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">Local Storage</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 pt-4 border-t-2 border-editorialSlate/10">
+                    <a href="https://react-task-manager-dxu2-1o04tr2j6-sai-sri-sashanks-projects.vercel.app" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider editorial-btn flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/Sai-Sri-Sashank/React-Task-Manager" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border-2 border-editorialSlate bg-editorialSand text-editorialSlate hover:bg-editorialSlate hover:text-editorialCream transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-github"></i> Repository
+                    </a>
+                </div>
             </div>
-            <h4 class="font-editorial text-2xl font-bold mb-3" id="education">
-              Education
-            </h4>
-            <p class="text-sm font-medium text-editorial-textMain mb-1">
-              VIT-AP University, Amaravati
-            </p>
-            <p class="text-xs text-editorial-textMuted mb-4">
-              B.Tech in Computer Science & Engineering<br />2024 – 2028
-              (Expected)
-            </p>
-            <div
-              class="p-3.5 rounded-2xl bg-editorial-bg border border-editorial-border text-xs text-editorial-textMuted"
-            >
-              <strong class="text-editorial-textMain font-semibold"
-                >Intermediate (Class XII):</strong
-              >
-              98.2% aggregate score with rigorous foundation in STEM.
+
+            <!-- Project 2: E-Commerce Website -->
+            <div class="editorial-card rounded-3xl p-8 bg-white flex flex-col justify-between reveal">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-editorialBlue text-editorialCream rounded-full text-xs code-font uppercase">
+                            FULL STACK APP
+                        </span>
+                        <span class="code-font text-xs text-editorialSlate/60">02 / FEATURED</span>
+                    </div>
+
+                    <h3 class="editorial-title text-3xl font-bold text-editorialSlate mb-3">
+                        E-Commerce Website
+                    </h3>
+
+                    <p class="text-editorialSlate/80 text-sm leading-relaxed mb-6 font-medium">
+                        A full-featured e-commerce web application with product browsing, cart, and checkout flow, built and deployed independently. Authentication (JWT) is not yet implemented.
+                    </p>
+
+                    <div class="space-y-2 mb-6 text-xs text-editorialSlate/90 font-medium bg-editorialSand/50 p-4 rounded-xl border border-editorialSlate/20">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-editorialAccent mt-0.5"></i>
+                            <span>Built product browsing, cart management, and a complete checkout flow end to end.</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-editorialAccent mt-0.5"></i>
+                            <span>Independently developed and deployed the full application stack.</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">React JS</span>
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">Node.js</span>
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">Express.js</span>
+                        <span class="px-2.5 py-1 bg-editorialSand border border-editorialSlate rounded text-xs code-font">MySQL</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 pt-4 border-t-2 border-editorialSlate/10">
+                    <a href="https://ecommerce-theta-two-82.vercel.app" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider editorial-btn flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Live Demo
+                    </a>
+                    <a href="https://github.com/Sai-Sri-Sashank/ECOMMERCE" target="_blank" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider border-2 border-editorialSlate bg-editorialSand text-editorialSlate hover:bg-editorialSlate hover:text-editorialCream transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-github"></i> Repository
+                    </a>
+                </div>
             </div>
-          </div>
-          <div
-            class="mt-6 pt-4 text-xs tracking-widest uppercase text-editorial-accent font-medium flex items-center gap-2"
-          >
-            <span>Verified Milestone</span>
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
+
         </div>
-      </div>
     </section>
 
-    <!-- Tech Stack & Skills Section -->
-    <section id="skills" class="py-20 px-6 max-w-7xl mx-auto">
-      <div class="mb-12 reveal text-center md:text-left">
-        <h2
-          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
-        >
-          Capabilities
-        </h2>
-        <h3 class="font-editorial text-3xl md:text-4xl font-bold">
-          Technical Arsenal
-        </h3>
-      </div>
+    <!-- Contact & Social Footer Section -->
+    <section id="contact" class="py-20 px-4 lg:px-12 max-w-7xl mx-auto border-t-2 border-editorialSlate/20">
+        <div class="editorial-card rounded-3xl p-8 lg:p-16 bg-editorialSlate text-editorialCream relative overflow-hidden shadow-[10px_10px_0px_#D97706]">
+            <!-- Decorative circle -->
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-editorialBlue/30 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Programming Languages -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
-            >
-              <i class="fa-solid fa-code"></i>
+            <div class="max-w-2xl mx-auto text-center space-y-6 relative z-10">
+                <span class="code-font text-xs uppercase tracking-widest text-editorialRose px-3 py-1 bg-editorialCream/10 rounded-full border border-editorialCream/20">
+                    04 // GET IN TOUCH
+                </span>
+                <h2 class="editorial-title text-4xl sm:text-6xl font-bold tracking-tight text-editorialCream">
+                    Let's Build Something <span class="italic text-editorialRose">Remarkable.</span>
+                </h2>
+                <p class="text-editorialCream/80 text-base lg:text-lg font-light leading-relaxed">
+                    I am actively seeking software engineering internships, collaborative projects, and opportunities to create high-impact digital products. Reach out anytime!
+                </p>
+
+                <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sashanktadivalasa2007@gmail.com" target="_blank" class="px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm bg-editorialRose text-editorialDark border-2 border-editorialCream hover:bg-editorialCream transition-all shadow-[4px_4px_0px_#F4ECD8] flex items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> sashanktadivalasa2007@gmail.com
+                    </a>
+                </div>
+
+                <!-- Social Links Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-12 border-t border-editorialCream/20">
+                    <a href="https://github.com/Sai-Sri-Sashank" target="_blank" class="p-4 rounded-2xl border border-editorialCream/20 bg-editorialCream/5 hover:bg-editorialCream/15 transition-all text-center group">
+                        <i class="fa-brands fa-github text-2xl text-editorialRose mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block text-xs font-bold uppercase code-font">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sai-sri-sashank-tadivalasa-524bb933a" target="_blank" class="p-4 rounded-2xl border border-editorialCream/20 bg-editorialCream/5 hover:bg-editorialCream/15 transition-all text-center group">
+                        <i class="fa-brands fa-linkedin text-2xl text-editorialRose mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block text-xs font-bold uppercase code-font">LinkedIn</span>
+                    </a>
+                    <a href="https://leetcode.com/u/Sashank-2007/" target="_blank" class="p-4 rounded-2xl border border-editorialCream/20 bg-editorialCream/5 hover:bg-editorialCream/15 transition-all text-center group">
+                        <i class="fa-solid fa-code text-2xl text-editorialRose mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block text-xs font-bold uppercase code-font">LeetCode</span>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sashanktadivalasa2007@gmail.com" target="_blank" class="p-4 rounded-2xl border border-editorialCream/20 bg-editorialCream/5 hover:bg-editorialCream/15 transition-all text-center group">
+                        <i class="fa-solid fa-paper-plane text-2xl text-editorialRose mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="block text-xs font-bold uppercase code-font">Email</span>
+                    </a>
+                </div>
             </div>
-            <h4 class="font-editorial text-lg font-bold">Languages</h4>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >Java</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >Python</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >C</span
-            >
-          </div>
         </div>
-
-        <!-- Web Development -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
-            >
-              <i class="fa-solid fa-laptop-code"></i>
-            </div>
-            <h4 class="font-editorial text-lg font-bold">Web Development</h4>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >HTML5</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >CSS3</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >JavaScript</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >React</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >Node.js</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >Express.js</span
-            >
-          </div>
-        </div>
-
-        <!-- Databases -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
-            >
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <h4 class="font-editorial text-lg font-bold">Databases</h4>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >MySQL</span
-            >
-          </div>
-        </div>
-
-        <!-- Other & Tools -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-6 hover:border-editorial-accent/50 transition-all reveal"
-        >
-          <div class="flex items-center gap-3 mb-6">
-            <div
-              class="w-10 h-10 rounded-xl bg-editorial-bg flex items-center justify-center text-editorial-accent border border-editorial-border"
-            >
-              <i class="fa-solid fa-toolbox"></i>
-            </div>
-            <h4 class="font-editorial text-lg font-bold">Tools & Core</h4>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >Git & GitHub</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >DSA</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >DBMS</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >OOPS</span
-            >
-            <span
-              class="px-3 py-1.5 rounded-xl bg-editorial-bg border border-editorial-border text-xs font-medium text-editorial-textMain"
-              >App Deployment</span
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Showcase Section -->
-    <section id="projects" class="py-20 px-6 max-w-7xl mx-auto">
-      <div
-        class="mb-12 flex flex-col md:flex-row md:items-end justify-between reveal"
-      >
-        <div>
-          <h2
-            class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
-          >
-            The Receipts
-          </h2>
-          <h3 class="font-editorial text-3xl md:text-4xl font-bold">
-            Featured Projects
-          </h3>
-        </div>
-        <p class="text-editorial-textMuted text-sm max-w-md mt-4 md:mt-0">
-          Production-deployed web solutions showcasing robust frontend
-          engineering, intuitive user workflows, and performance optimization.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Project 1: React Task Manager -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 flex flex-col justify-between hover:border-editorial-accent/50 transition-all duration-300 group reveal"
-        >
-          <div>
-            <div class="flex items-center justify-between mb-6">
-              <span
-                class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-editorial-bg border border-editorial-border text-editorial-accent font-medium"
-                >Frontend Application</span
-              >
-              <span class="text-xs text-editorial-textMuted font-mono"
-                >React / LocalStorage</span
-              >
-            </div>
-            <h4
-              class="font-editorial text-2xl md:text-3xl font-bold mb-4 group-hover:text-editorial-accent transition-colors"
-            >
-              React Task Manager
-            </h4>
-            <p class="text-editorial-textMuted leading-relaxed mb-6">
-              Frontend-only task management application built with React,
-              utilizing browser local storage for persistent data management
-              without a backend dependency. Clean modular architecture and
-              responsive interface.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-8">
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >React</span
-              >
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >Local Storage</span
-              >
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >CSS Modules</span
-              >
-            </div>
-          </div>
-          <div
-            class="pt-6 border-t border-editorial-border flex flex-wrap items-center justify-between gap-4"
-          >
-            <div class="flex items-center gap-3">
-              <a
-                href="https://github.com/Sai-Sri-Sashank/React-Task-Manager"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 text-xs text-editorial-textMuted hover:text-editorial-accent transition-colors"
-              >
-                <i class="fa-brands fa-github text-sm"></i>
-                <span>Source Code</span>
-              </a>
-            </div>
-            <a
-              href="https://react-task-manager-dxu2-1o04tr2j6-sai-sri-sashanks-projects.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-editorial-accent text-editorial-bg text-xs font-semibold hover:bg-editorial-accentLight transition-all"
-            >
-              <span>Live Preview</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Project 2: E-Commerce Website -->
-        <div
-          class="bg-editorial-card border border-editorial-border rounded-3xl p-8 flex flex-col justify-between hover:border-editorial-accent/50 transition-all duration-300 group reveal"
-        >
-          <div>
-            <div class="flex items-center justify-between mb-6">
-              <span
-                class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-editorial-bg border border-editorial-border text-editorial-accent font-medium"
-                >Full-Featured Web App</span
-              >
-              <span class="text-xs text-editorial-textMuted font-mono"
-                >E-Commerce / Deployed</span
-              >
-            </div>
-            <h4
-              class="font-editorial text-2xl md:text-3xl font-bold mb-4 group-hover:text-editorial-accent transition-colors"
-            >
-              E-Commerce Website
-            </h4>
-            <p class="text-editorial-textMuted leading-relaxed mb-6">
-              Full-featured e-commerce web application featuring product
-              browsing, interactive cart management, and streamlined checkout
-              flow, built and deployed independently.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-8">
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >JavaScript</span
-              >
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >Node.js</span
-              >
-              <span
-                class="text-xs px-2.5 py-1 rounded-lg bg-editorial-bg text-editorial-textMuted border border-editorial-border"
-                >Vercel</span
-              >
-            </div>
-          </div>
-          <div
-            class="pt-6 border-t border-editorial-border flex flex-wrap items-center justify-between gap-4"
-          >
-            <div class="flex items-center gap-3">
-              <a
-                href="https://github.com/Sai-Sri-Sashank/ECOMMERCE"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 text-xs text-editorial-textMuted hover:text-editorial-accent transition-colors"
-              >
-                <i class="fa-brands fa-github text-sm"></i>
-                <span>Source Code</span>
-              </a>
-            </div>
-            <a
-              href="https://ecommerce-theta-two-82.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-editorial-accent text-editorial-bg text-xs font-semibold hover:bg-editorial-accentLight transition-all"
-            >
-              <span>Live Preview</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact & Footer Section -->
-    <section id="contact" class="py-24 px-6 max-w-5xl mx-auto text-center">
-      <div
-        class="bg-editorial-card border border-editorial-border rounded-3xl p-10 md:p-16 relative overflow-hidden reveal"
-      >
-        <div class="bg-glow top-0 right-0"></div>
-
-        <h2
-          class="text-xs uppercase tracking-widest text-editorial-accent font-semibold mb-2"
-        >
-          Let's Build Together
-        </h2>
-        <h3 class="font-editorial text-3xl md:text-5xl font-bold mb-6">
-          Start a Conversation
-        </h3>
-        <p
-          class="text-editorial-textMuted max-w-xl mx-auto mb-10 text-sm md:text-base leading-relaxed"
-        >
-          Whether you have an opportunity, a project collaboration in mind, or
-          just want to connect, feel free to reach out through any of the
-          channels below.
-        </p>
-
-        <!-- Social Links Grid -->
-        <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
-          <!-- GitHub -->
-          <a
-            href="https://github.com/Sai-Sri-Sashank"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
-          >
-            <i class="fa-brands fa-github text-lg"></i>
-            <span>GitHub</span>
-          </a>
-          <!-- LinkedIn -->
-          <a
-            href="https://www.linkedin.com/in/sai-sri-sashank-tadivalasa-524bb933a"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
-          >
-            <i class="fa-brands fa-linkedin text-lg text-[#0A66C2]"></i>
-            <span>LinkedIn</span>
-          </a>
-          <!-- LeetCode -->
-          <a
-            href="https://leetcode.com/u/Sashank-2007/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-editorial-bg border border-editorial-border hover:border-editorial-accent text-editorial-textMain text-sm font-medium transition-all"
-          >
-            <i class="fa-solid fa-code text-lg text-[#FFA116]"></i>
-            <span>LeetCode</span>
-          </a>
-        </div>
-
-        <div class="pt-8 border-t border-editorial-border inline-block w-full">
-          <a
-            href="mailto:saisrishanktadivalasa@gmail.com"
-            class="text-editorial-accent hover:underline text-sm md:text-base font-medium tracking-wide"
-          >
-            <i class="fa-regular fa-envelope mr-2"></i>
-            saisrishanktadivalasa@gmail.com
-          </a>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
-    <footer
-      class="py-8 px-6 border-t border-editorial-border text-center text-xs text-editorial-textMuted max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"
-    >
-      <p>© 2026 Tadivalasa Sai Sri Sashank. All rights reserved.</p>
-      <p>Built with Editorial Elegance & Tailwind CSS.</p>
+    <footer class="bg-editorialSlate text-editorialCream py-8 border-t-2 border-editorialCream/20 text-center text-xs code-font">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Tadivalasa Sai Sri Sashank. All Rights Reserved.</p>
+            <p class="text-editorialRose">Designed with Editorial Fashion Magazine Aesthetic</p>
+        </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu & Scroll Reveals -->
+    <!-- JavaScript for Interactions -->
     <script>
-      // Mobile menu toggle
-      const menuBtn = document.getElementById("menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const mobileLinks = document.querySelectorAll(".mobile-link");
+        // Toggle Mobile Menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-      menuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-
-      mobileLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
-      });
 
-      // Intersection Observer for smooth reveal animations
-      const revealElements = document.querySelectorAll(".reveal");
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
 
-      const revealObserver = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("active");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        },
-      );
+        // Scroll Reveal Animation observer
+        const revealElements = document.querySelectorAll('.reveal');
 
-      revealElements.forEach((el) => {
-        revealObserver.observe(el);
-      });
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
     </script>
-  </body>
+</body>
 </html>
